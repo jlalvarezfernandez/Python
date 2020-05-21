@@ -104,12 +104,12 @@ try:
         print()
 
 except FileNotFoundError:
+    # si el fichero no existe previamente, tenemos que crearlo y añadir la pelicula pasada por parámetro
     print(f"EL fichero no existe, y se procede a crearlo")
     manejador = open(fichero_txt, "w")
     manejador.write(f"{titulo} | {titulo_original} | {popularidad} | {valoracion} | {fecha_estreno} \n")
     manejador.close()
 
-# si el fichero no existe previamente, tenemos que crearlo y añadir la pelicula pasada por parámetro
 
 
 
