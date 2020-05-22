@@ -86,18 +86,18 @@ try:
     if open(fichero_txt):
         # primero lo abrimos para leer el contenido de lo que hay en el fichero
         manejador = open(fichero_txt, "r")
-        for linea in manejador:
-            # con find buscamos el titulo de la pelicula introducida por parámetro
-            linea_texto = linea.find(titulo)
-            # si el titulo de la pelicula esta mas de 1 vez en el fichero no se agregará
-            if linea_texto >=0:
-                # si la pelicula ya esta en el fichero mandamos aviso
+        lista = manejador.readlines()
+        num_linea = 1
+        # recorremos el fichero y si el titulo de la pelicula ya esta en el archivo no la añadimos
+        for linea in lista:
+            num_linea +=1
+            if titulo in linea:
                 print("La pelicula ya esta en el fichero y no se puede agregar")
                 manejador.close()
                 exit(4)
         # si la pelicula no esta en el fichero debemos añadirla
         manejador = open(fichero_txt, "a")
-        manejador.write(f"{titulo} | {titulo_original} | {popularidad} | {valoracion} | {fecha_estreno}\n")
+        manejador.write(f"{num_linea}: {titulo} | {titulo_original} | {popularidad} | {valoracion} | {fecha_estreno}\n")
         manejador.close()
         print("Pelicula añadida correctamente al fichero")
         exit(8)
@@ -105,7 +105,7 @@ try:
 
 except FileNotFoundError:
     # si el fichero no existe previamente, tenemos que crearlo y añadir la pelicula pasada por parámetro
-    print(f"EL fichero no existe, y se procede a crearlo")
+    print(f"El fichero no existe, y se procede a crearlo")
     manejador = open(fichero_txt, "w")
     manejador.write(f"{titulo} | {titulo_original} | {popularidad} | {valoracion} | {fecha_estreno} \n")
     manejador.close()
